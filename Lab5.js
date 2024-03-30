@@ -19,6 +19,15 @@ const todos = [
 
 const Lab5 = (app) => {
 
+    app.post("/a5/todos", (req, res) => {
+        const newTodo = {
+            ...req.body,
+            id: new Date().getTime(),
+        };
+        todos.push(newTodo);
+        res.json(newTodo);
+    });
+
     app.get("/a5/todos/:id/completed/:completed", (req, res) => {
         const { id, completed } = req.params;
         const todo = todos.find((t) => t.id === parseInt(id));
