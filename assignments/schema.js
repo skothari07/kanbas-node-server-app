@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const assignmentSchema = new mongoose.Schema({
-    // _id: { type: String, required: true, unique: true },
+    _id: { type: String, required: true, unique: true },
     title: String,
     desc: String,
     points: Number,
