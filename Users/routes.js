@@ -32,6 +32,15 @@ export default function UserRoutes(app) {
         const { userId } = req.params;
         const status = await dao.updateUser(userId, req.body);
         currentUser = await dao.findUserById(userId);
+        req.session["currentUser"] = currentUser;
+        res.json(status);
+    };
+
+    const updateUserByCredentials = async (req, res) => {
+        const { username } = req.params;
+        const status = await dao.updateUserByUsername(username, req.body);
+        const currentUser = await dao.findUserByUsername(username);
+        req.session["currentUser"] = currentUser;
         res.json(status);
     };
 
@@ -74,7 +83,8 @@ export default function UserRoutes(app) {
     app.post("/api/users", createUser);
     app.get("/api/users", findAllUsers);
     app.get("/api/users/:userId", findUserById);
-    app.put("/api/users/:userId", updateUser);
+    app.put("/api/users/:username", updateUserByCredentials);
+    //app.put("/api/users/:userId", updateUser);
     app.delete("/api/users/:userId", deleteUser);
     app.post("/api/users/signup", signup);
     app.post("/api/users/signin", signin);
