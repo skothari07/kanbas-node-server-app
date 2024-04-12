@@ -1,4 +1,5 @@
 import model from "./model.js";
+import enrollmentModel from "./enrollmentModel.js";
 
 export const createCourse = (course) => {
     return model.create(course);
