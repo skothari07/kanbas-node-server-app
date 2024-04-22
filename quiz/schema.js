@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 const questionSchema = new mongoose.Schema({
-    quizId: String,
     description: String,
     options: [],
     type: String,
@@ -9,7 +8,6 @@ const questionSchema = new mongoose.Schema({
   });
 
 const quizSchema = new mongoose.Schema({
-    _id: { type: String, required: true, unique: true },
     title: String,
     desc: String,
     points: Number,
@@ -18,6 +16,6 @@ const quizSchema = new mongoose.Schema({
     isPublished: Boolean,
     questions: [questionSchema],
 },
-    { collection: "quiz" });
+    { collection: "quizzes" });
     
 export default quizSchema;

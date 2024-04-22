@@ -9,6 +9,7 @@ import mongoose from "mongoose";
 import UserRoutes from "./Users/routes.js";
 import session from "express-session";
 import "dotenv/config";
+import QuizRoutes from './quiz/routes.js';
 
 const branches = ["master", "a5", "a6", "project"];
 
@@ -51,4 +52,5 @@ Lab5(app);
 CourseRoutes(app);
 ModuleRoutes(app);
 AssignmentRoutes(app);
+QuizRoutes(app);
 app.listen(process.env.PORT || 4000);
