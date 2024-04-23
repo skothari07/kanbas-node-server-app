@@ -13,8 +13,8 @@ function AssignmentRoutes(app) {
         const newAssignment = {
             ...req.body,
             course: cid,
-            _id: new Date().getTime().toString(),
         };
+        delete newAssignment.aid;
         const assignment = await dao.createAssignment(newAssignment);
         res.send(newAssignment);
     });

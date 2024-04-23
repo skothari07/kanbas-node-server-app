@@ -1,12 +1,18 @@
 import mongoose from "mongoose";
 
 const assignmentSchema = new mongoose.Schema({
-    _id: String,
+    aid: { type: String, required: true, unique: true, default: function() {
+        return 'A' + Math.floor(Math.random() * 1000);
+    }},
     title: String,
     desc: String,
     points: Number,
     due_date: Date,
-    course: String,
+    course: {
+        type: String,
+        ref: 'courseModel',
+        required: true
+    }
 },
     { collection: "assignments" });
     

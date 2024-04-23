@@ -4,5 +4,5 @@ export const createModule = (module) => {
     return model.create(module);
 };
 export const findModulesByCourse = (course) => model.find({ course: course });
-export const deleteModule = (moduleId) => model.deleteOne({ _id: moduleId });
-export const updateModule = (moduleId, updatedModule) => model.updateOne({ _id: moduleId }, { $set: updatedModule });
+export const deleteModule = (moduleId) => model.deleteOne({ mid: moduleId });
+export const updateModule = (moduleId, updatedModule) => model.updateOne({ mid: moduleId }, { $set: updatedModule });

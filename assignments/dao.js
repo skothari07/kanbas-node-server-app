@@ -5,5 +5,5 @@ export const createAssignment = (assignment) => {
 };
 export const findAllAssignments = () => model.find();
 export const findAssignmentByCourse = (course) => model.find({ course: course });
-export const deleteAssignment = (assignmentId) => model.deleteOne({ _id: assignmentId });
-export const updateAssignment = (assignmentId, updatedAssignment) => model.updateOne({ _id: assignmentId }, { $set: updatedAssignment });
+export const deleteAssignment = (assignmentId) => model.deleteOne({ aid: assignmentId });
+export const updateAssignment = (assignmentId, updatedAssignment) => model.updateOne({ aid: assignmentId }, { $set: updatedAssignment });

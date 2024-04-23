@@ -1,15 +1,17 @@
 import mongoose from "mongoose";
 
 const courseSchema = new mongoose.Schema({
-        _id: String,
         name: { type: String, required: true, unique: true },
-        number: { type: String, required: true, unique: true },
+        courseId: { type: String, required: true, unique: true, default: function() {
+            return 'RS' + Math.floor(Math.random() * 1000);
+        }},
         image: String,
         startDate: Date,
         endDate: Date,
         instructor: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'users'
+            type: String,
+            ref: 'UserModel',
+            required: true
         }
     }, { collection: "courses" });
     

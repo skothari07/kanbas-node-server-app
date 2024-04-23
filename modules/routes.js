@@ -13,8 +13,8 @@ function ModuleRoutes(app) {
         const newModule = {
             ...req.body,
             course: cid,
-            _id: new Date().getTime().toString(),
         };
+        delete newModule.mid;
         const module = await dao.createModule(newModule);
         res.send(newModule);
     });

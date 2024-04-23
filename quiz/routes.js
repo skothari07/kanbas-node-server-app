@@ -13,7 +13,6 @@ function QuizRoutes(app) {
         const newQuiz = {
             ...req.body,
             course: cid,
-            _id: new Date().getTime().toString(),
         };
         const quiz = await dao.createQuiz(newQuiz);
         res.send(newQuiz);

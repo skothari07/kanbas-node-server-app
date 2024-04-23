@@ -7,10 +7,16 @@ const lessonSchema = new mongoose.Schema({
   });
 
 const moduleSchema = new mongoose.Schema({
-    _id: String,
+    mid: { type: String, required: true, unique: true, default: function() {
+        return 'M' + Math.floor(Math.random() * 1000);
+    }},
     name: { type: String, required: true, unique: true },
     desc: String,
-    course: String,
+    course: {
+        type: String,
+        ref: 'courseModel',
+        required: true
+    },
     lessons: [lessonSchema]
 },
     { collection: "modules" });

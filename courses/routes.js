@@ -5,8 +5,10 @@ export default function CourseRoutes(app) {
     app.post("/api/courses", async (req, res) => {
         const course = {
             ...req.body,
-            _id: new Date().getTime().toString()
         };
+        if (course.courseId === '0') {
+            course.courseId = 'RS' + Math.floor(Math.random() * 1000);
+        }
         const newCourse = await dao.createCourse(course);
         res.send(course);
     });

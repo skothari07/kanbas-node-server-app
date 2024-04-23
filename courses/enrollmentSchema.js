@@ -2,15 +2,15 @@ import mongoose from "mongoose";
 
 const enrollmentSchema = new mongoose.Schema({
     course: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'courses',
+        type: String,
+        ref: 'courseModel',
         required: true
     },
     student: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
+        type: String,
+        ref: 'UserModel',
         required: true
-    },
+    }
     }, { collection: "enrollment" });
     
 export default enrollmentSchema;
