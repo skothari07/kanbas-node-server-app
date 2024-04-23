@@ -25,6 +25,29 @@ export default function CourseRoutes(app) {
         res.sendStatus(204);
     });
 
+    app.get("/api/courses/instructor/:id", async (req, res) => {
+        const { id } = req.params;
+        const courses = await dao.findCourseByInstructor(id);
+        if (!courses) {
+            res.status(404).send("Course not found");
+            return;
+        }
+        res.send(courses);
+    });
+
+    app.get("/api/courses/student/:id", async (req, res) => {
+        const { id } = req.params;
+        const enrollement = await dao.findCoursesByStudent(id);
+        const courses = [];
+        enrollement.map(async (course) => courses.push(course.course));
+        const response = await dao.findCourses(courses);
+        if (!response) {
+            res.status(404).send("Course not found");
+            return;
+        }
+        res.send(response);
+    });
+
     app.get("/api/courses/:id", async (req, res) => {
         const { id } = req.params;
         const course = await dao.findCourseByID(id);
