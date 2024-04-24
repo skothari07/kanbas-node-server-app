@@ -1,6 +1,12 @@
 import * as dao from "./dao.js"; 
 
 function QuizRoutes(app) {
+
+    app.get("/api/courses/Quiz/:quizId", async (req, res) => {
+        const { qid } = req.params;
+        const quiz = await dao.findQuizById(qid);
+        res.send(quiz);
+    });
     
     app.get("/api/courses/:cid/quiz", async (req, res) => {
         const { cid } = req.params;
