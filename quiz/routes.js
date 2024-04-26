@@ -20,6 +20,9 @@ function QuizRoutes(app) {
             ...req.body,
             course: cid,
         };
+        if (newQuiz.qid === '') {
+            newQuiz.qid = 'Q' + Math.floor(Math.random() * 1000);
+        }
         const quiz = await dao.createQuiz(newQuiz);
         res.send(newQuiz);
     });
@@ -35,5 +38,36 @@ function QuizRoutes(app) {
         const status = await dao.updateQuiz(qid, req.body);
         res.sendStatus(204);
     });
+   
+    app.get("/api/courses/:qid/questions", async (req, res) => {
+        const { qid } = req.params;
+        const questions = await dao.findQuestionsByQuiz(qid);
+        res.send(questions);
+    });
+
+    app.post("/api/courses/quiz/question/create", async (req, res) => {
+    
+        const newQuestion = {
+            ...req.body,
+        };
+        if (newQuestion.questionId === '') {
+            newQuestion.questionId = 'QS' + Math.floor(Math.random() * 1000);
+        }
+        const question = await dao.createQuestion(newQuestion);
+        res.send(newQuestion);
+    });
+
+    app.delete("/api/courses/quiz/question/:questionId", async (req, res) => {
+        const { questionId } = req.params;
+        const status = await dao.deleteQuestion(questionId);
+        res.sendStatus(200);
+    });
+
+    app.put("/api/courses/quiz/question/:questionId", async (req, res) => {
+        const { questionId } = req.params;
+        const status = await dao.updateQuestion(questionId, req.body);
+        res.sendStatus(204);
+    });
+
 }
 export default QuizRoutes;

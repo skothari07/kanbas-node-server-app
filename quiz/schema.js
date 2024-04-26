@@ -1,26 +1,8 @@
 import mongoose from "mongoose";
 
-const questionSchema = new mongoose.Schema({
-    description: { type: String, required: true },
-    points: { type: Number, default: 0 },
-    questionType: {
-        type: String,
-        enum: ['Multiple Choice', 'True/False', 'Fill in the Blanks'],
-        default: 'Multiple Choice'
-    },
-    options: [{
-        text: String,
-        isCorrect: Boolean
-    }],
-    trueFalse : Boolean,
-    blanks:[{
-        answer: String
-    }],
-  });
-
 const quizSchema = new mongoose.Schema({
     qid: { type: String, required: true, unique: true, default: function() {
-        return 'Q' + Math.floor(Math.random() * 1000);
+        return 'QZ' + Math.floor(Math.random() * 1000);
     }},
     title: { type: String, required: true },
     desc: String,
@@ -52,7 +34,7 @@ const quizSchema = new mongoose.Schema({
         ref: 'courseModel',
         required: true
     },
-    questions: [questionSchema],
+    questions: [],
 },
     { collection: "quizzes" });
     
