@@ -3,8 +3,8 @@ import * as dao from "./dao.js";
 function QuizRoutes(app) {
 
     app.get("/api/courses/Quiz/:quizId", async (req, res) => {
-        const { qid } = req.params;
-        const quiz = await dao.findQuizById(qid);
+        const { quizId } = req.params;
+        const quiz = await dao.findQuizById(quizId);
         res.send(quiz);
     });
     
@@ -39,14 +39,13 @@ function QuizRoutes(app) {
         res.sendStatus(204);
     });
    
-    app.get("/api/courses/:qid/questions", async (req, res) => {
-        const { qid } = req.params;
-        const questions = await dao.findQuestionsByQuiz(qid);
+    app.get("/api/courses/quiz/questions/:qsId", async (req, res) => {
+        const { qsId } = req.params;
+        const questions = await dao.findQuestionById(qsId);
         res.send(questions);
     });
 
     app.post("/api/courses/quiz/question/create", async (req, res) => {
-    
         const newQuestion = {
             ...req.body,
         };
